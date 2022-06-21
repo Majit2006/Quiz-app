@@ -2,26 +2,42 @@
   <div>
     <div class="d-flex justify-content-center flex-wrap m-3" v-if="count < 20">
       <div class="card col-md-5">
-        <div class="card-header bg-dark text-light  text-center">{{ questions[count].category }}</div>
+        <div class="card-header bg-dark text-light  text-center">
+          {{ questions[count].category }}
+        </div>
         <div class="card-body bg-dark text-light">
-          <h5 class="card-title text-center">{{ questions[count].question }}</h5>
-          <ul class="list-group ">
-            <li class="list-group-item bg-dark text-light border-light"
-              v-for="(option, index) in questions[count].incorrectAnswers " :key="index.id">
+          <h5 class="card-title text-center">
+            {{ questions[count].question }}
+          </h5>
+          <ul class="list-group  answers">
+            <li
+              class="list-group-item bg-dark text-light border-light"
+              v-for="(option, index) in questions[count].incorrectAnswers"
+              :key="index.id"
+            >
               <label for="radio">
-                <input class="form-check-input me-1" type="radio" id="radio" name="radio" checked>
-                 {{ option }}
-                {{ index }}
+                <input
+                  class="form-check-input me-1"
+                  type="radio"
+                  id="radio"
+                  name="radio"
+                  @click="checkAnswer(answer)"
+                />
+                {{ option }}
               </label>
             </li>
           </ul>
-          <button type="submit" class="btn btn-primary mt-4" @click="++count">Next</button>
+          <button type="submit" class="btn btn-primary mt-4" @click="++count">
+            Next
+          </button>
         </div>
-
       </div>
       {{ count }}
     </div>
-    <div class="card col-md-5 d-flex justify-content-center  algin-item-center m-auto mt-4 bg-dark text-light" v-else>
+    <div
+      class="card col-md-5 d-flex justify-content-center  algin-item-center m-auto mt-4 bg-dark text-light"
+      v-else
+    >
       <div class="card-body">
         <h1 class="card-title text-center border-bottom pb-2">Quiz Result</h1>
         <div class="answers">
@@ -36,33 +52,47 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
-      correctAnswers: 0,
-      wrongAnswers: 0,
       count: 0,
-      number: 1,
       questionsLength: 20,
       questions: [],
+      selectedAnswer: "",
+      wrongAnswers: 0,
+      correctAnswe: 0,
     };
   },
   mounted() {
     axios
-      .get("https://the-trivia-api.com/api/questions?categories=arts_and_literature,food_and_drink,film_and_tv,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure&limit=20&difficulty=hard")
-      .then(response => {
+      .get(
+        "https://the-trivia-api.com/api/questions?categories=arts_and_literature,food_and_drink,film_and_tv,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure&limit=20&difficulty=hard"
+      )
+      .then((response) => {
         this.questions = response.data;
         this.questions.forEach((question) => {
-          question.incorrectAnswers.push(question.correctAnswer)
-        })
+          question.incorrectAnswers.push(question.correctAnswer);
+          question.incorrectAnswers.sort(() => Math.random() - 0.5);
+        });
         console.log(response.data);
-      })
+      });
   },
-
+  methods: {
+    checkAnswer(answer) {
+      this.selectedAnswer = answer;
+      if (answer == this.questions[this.count].correctAnswer) {
+        if (this.correctAnswers.indexOf(answer) === -1) {
+          this.correctAnswers.push(answer);
+        }
+        this.correctAnswe++;
+      } else {
+        this.wrongAnswers++;
+      }
+    },
+  },
 };
 </script>
-
 
 <style>
 [type="radio"] {
