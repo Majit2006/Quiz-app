@@ -21,7 +21,7 @@
                   type="radio"
                   id="radio"
                   name="radio"
-                  @click="checkAnswer(answer)"
+                  @click="checkAnswer(option)"
                 />
                 {{ option }}
               </label>
@@ -59,9 +59,8 @@ export default {
       count: 0,
       questionsLength: 20,
       questions: [],
-      selectedAnswer: "",
-      wrongAnswers: 0,
-      correctAnswe: 0,
+      selectedAnswers: [],
+      correctAnswers: [],
     };
   },
   mounted() {
@@ -79,15 +78,20 @@ export default {
       });
   },
   methods: {
-    checkAnswer(answer) {
-      this.selectedAnswer = answer;
-      if (answer == this.questions[this.count].correctAnswer) {
-        if (this.correctAnswers.indexOf(answer) === -1) {
-          this.correctAnswers.push(answer);
+    checkAnswer(option) {
+      let answersList = document.querySelectorAll("label");
+      answersList.forEach(function(item) {
+        item.removeAttribute("class");
+      });
+
+      this.selectedAnswers[this.count] = option;
+      if (option == this.questions[this.count].correctAnswer) {
+        if (this.correctAnswers.indexOf(option) === -1) {
+          this.correctAnswers.push(option);
         }
-        this.correctAnswe++;
+        event.target.classList.add("text-white", "bg-success");
       } else {
-        this.wrongAnswers++;
+        event.target.classList.add("text-white", "bg-danger");
       }
     },
   },
