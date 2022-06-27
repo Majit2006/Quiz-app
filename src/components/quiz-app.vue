@@ -14,17 +14,9 @@
               class="list-group-item bg-dark text-light border-light"
               v-for="(option, index) in questions[count].incorrectAnswers"
               :key="index.id"
+              @click="checkAnswer(option)"
             >
-              <label for="radio">
-                <input
-                  class="form-check-input me-1"
-                  type="radio"
-                  id="radio"
-                  name="radio"
-                  @click="checkAnswer(option)"
-                />
-                {{ option }}
-              </label>
+              {{ option }}
             </li>
           </ul>
           <button type="submit" class="btn btn-primary mt-4" @click="++count">
@@ -42,7 +34,7 @@
         <h1 class="card-title text-center border-bottom pb-2">Quiz Result</h1>
         <div class="answers">
           <p>correct answers:{{ correctAnswers }}</p>
-          <p>wrong answers:{{ wrongAnswers }}</p>
+          <!-- <p>wrong answers:{{ wrongAnswers }}</p> -->
         </div>
         <div class="answers-btn border-top">
           <a href="/" class="btn btn-sm btn-primary mt-4">Go To Home</a>
@@ -79,7 +71,7 @@ export default {
   },
   methods: {
     checkAnswer(option) {
-      let answersList = document.querySelectorAll("label");
+      let answersList = document.querySelectorAll("ul li");
       answersList.forEach(function(item) {
         item.removeAttribute("class");
       });
