@@ -12,8 +12,8 @@
           <ul class="list-group  answers">
             <li
               class="list-group-item bg-dark text-light border-light"
-              v-for="(option, index) in questions[count].incorrectAnswers"
-              :key="index.id"
+              v-for="option in questions[count].incorrectAnswers"
+              :key="option"
               @click="checkAnswer(option)"
             >
               {{ option }}
@@ -33,8 +33,8 @@
       <div class="card-body">
         <h1 class="card-title text-center border-bottom pb-2">Quiz Result</h1>
         <div class="answers">
-          <p>correct answers:{{ correctAnswers }}</p>
-          <!-- <p>wrong answers:{{ wrongAnswers }}</p> -->
+          <p>correct answers:{{ correctAns }}</p>
+          <p>wrong answers:{{ wrongAnswers }}</p>
         </div>
         <div class="answers-btn border-top">
           <a href="/" class="btn btn-sm btn-primary mt-4">Go To Home</a>
@@ -53,6 +53,8 @@ export default {
       questions: [],
       selectedAnswers: [],
       correctAnswers: [],
+      correctAns: 0,
+      wrongAnswers: 0,
     };
   },
   mounted() {
@@ -81,9 +83,11 @@ export default {
         if (this.correctAnswers.indexOf(option) === -1) {
           this.correctAnswers.push(option);
         }
-        event.target.classList.add("text-white", "bg-success");
+        event.target.classList.add("text-white", "bg");
+        this.correctAns++;
       } else {
-        event.target.classList.add("text-white", "bg-danger");
+        event.target.classList.add("text-white", "bg");
+        this.wrongAnswers++;
       }
     },
   },
@@ -103,5 +107,12 @@ export default {
 
 .answers-btn {
   font-size: 20px;
+}
+.bg {
+  background-color: rgba(255, 0, 0, 0);
+}
+
+.bg {
+  background-color: rgba(255, 0, 0, 0);
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <div class="container-sm col-sm-6">
-    <Test />
+  <div class="container">
+    <quiz-app />
   </div>
 </template>
 
 <script>
-import Test from "./components/test.vue";
+import QuizApp from "./components/quiz-app.vue";
 export default {
-  components: { Test },
+  components: { QuizApp },
 };
 </script>
