@@ -1,14 +1,12 @@
 <template>
-  <div class="container">
-    <quiz-app />
+  <div class="container-sm col-sm-6">
+    <Test />
   </div>
 </template>
+
 <script>
-import QuizApp from "./components/quiz-app.vue";
+import Test from "./components/test.vue";
 export default {
-  components: { QuizApp },
+  components: { Test },
 };
 </script>
-<style>
-@import url('./assets/bootstrap.css');
-</style>
