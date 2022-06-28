@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-flex justify-content-center flex-wrap m-3" v-if="count < 20">
-      <div class="card col-md-5">
+      <div class="card col-md-6">
         <div class="card-header bg-dark text-light  text-center">
           {{ questions[count].category }}
         </div>
@@ -19,7 +19,12 @@
               {{ option }}
             </li>
           </ul>
-          <button type="submit" class="btn btn-primary mt-4" @click="++count">
+          <button
+            type="submit"
+            class="btn btn-primary mt-4"
+            @click="++count"
+            :class="{ disabled: selectedAnswers === '' }"
+          >
             Next
           </button>
         </div>
@@ -33,8 +38,8 @@
       <div class="card-body">
         <h1 class="card-title text-center border-bottom pb-2">Quiz Result</h1>
         <div class="answers">
-          <p>correct answers:{{ correctAns }}</p>
-          <p>wrong answers:{{ wrongAnswers }}</p>
+          <p class="me-3">correct answers:{{ correctAns }}</p>
+          <p class="me-3">wrong answers:{{ wrongAnswers }}</p>
         </div>
         <div class="answers-btn border-top">
           <a href="/" class="btn btn-sm btn-primary mt-4">Go To Home</a>
@@ -73,7 +78,7 @@ export default {
   },
   methods: {
     checkAnswer(option) {
-      let answersList = document.querySelectorAll("ul li");
+      let answersList = document.querySelectorAll("ul.answer li");
       answersList.forEach(function(item) {
         item.removeAttribute("class");
       });
@@ -99,19 +104,9 @@ export default {
   box-shadow: none !important;
 }
 
-.answers {
-  display: flex;
-  text-transform: capitalize;
-  flex-direction: column;
-}
-
 .answers-btn {
   font-size: 20px;
 }
-.bg {
-  background-color: rgba(255, 0, 0, 0);
-}
-
 .bg {
   background-color: rgba(255, 0, 0, 0);
 }
