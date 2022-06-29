@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center flex-wrap m-3" v-if="count < 20">
       <div class="card col-md-6">
         <div class="card-header bg-dark text-light  text-center">
-          {{ questions[count].category }}
+          {{ questions[count].category }} / {{ count }}
         </div>
         <div class="card-body bg-dark text-light">
           <h5 class="card-title text-center">
@@ -11,7 +11,7 @@
           </h5>
           <ul class="list-group  answers">
             <li
-              class="list-group-item bg-dark text-light border-light"
+              class="list-group-item bg-dark text-light border-light m-2 border-2"
               v-for="option in questions[count].incorrectAnswers"
               :key="option"
               @click="checkAnswer(option)"
@@ -21,15 +21,13 @@
           </ul>
           <button
             type="submit"
-            class="btn btn-primary mt-4"
+            class="btn btn-primary btn-sm mt-4"
             @click="++count"
-            :class="{ disabled: selectedAnswers === '' }"
           >
             Next
           </button>
         </div>
       </div>
-      {{ count }}
     </div>
     <div
       class="card col-md-5 d-flex justify-content-center  algin-item-center m-auto mt-4 bg-dark text-light"
@@ -38,11 +36,13 @@
       <div class="card-body">
         <h1 class="card-title text-center border-bottom pb-2">Quiz Result</h1>
         <div class="answers">
-          <p class="me-3">correct answers:{{ correctAns }}</p>
-          <p class="me-3">wrong answers:{{ wrongAnswers }}</p>
+          <p>correct answers: {{ correctAns }}</p>
+          <p>wrong answers: {{ wrongAnswers }}</p>
         </div>
         <div class="answers-btn border-top">
-          <a href="/" class="btn btn-sm btn-primary mt-4">Go To Home</a>
+          <a href="#" @click="resetQuiz()" class="btn btn-sm btn-primary mt-4">
+            Go To Home
+          </a>
         </div>
       </div>
     </div>
@@ -60,6 +60,7 @@ export default {
       correctAnswers: [],
       correctAns: 0,
       wrongAnswers: 0,
+      disabled: true,
     };
   },
   mounted() {
@@ -78,7 +79,7 @@ export default {
   },
   methods: {
     checkAnswer(option) {
-      let answersList = document.querySelectorAll("ul.answer li");
+      let answersList = document.querySelectorAll("ul.answers li");
       answersList.forEach(function(item) {
         item.removeAttribute("class");
       });
@@ -95,6 +96,11 @@ export default {
         this.wrongAnswers++;
       }
     },
+    resetQuiz() {
+      this.count = 0;
+      this.correctAnswers = [];
+      this.selectedAnswers = [];
+    },
   },
 };
 </script>
@@ -107,7 +113,14 @@ export default {
 .answers-btn {
   font-size: 20px;
 }
+li {
+  border: 3px solid #fff;
+  list-style: none;
+  margin: 10px;
+  padding: 8px;
+}
 .bg {
-  background-color: rgba(255, 0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  color: red;
 }
 </style>
