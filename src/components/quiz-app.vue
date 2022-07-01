@@ -1,31 +1,39 @@
 <template>
   <div>
+    <div class="card quiz-start text-center" v-if="count < 0">
+      <h1>Hellow World</h1>
+    </div>
+
     <div class="d-flex justify-content-center flex-wrap m-3" v-if="count < 20">
       <div class="card col-md-6">
+        <div class="time">
+          <input type="text" id="minutes" disabled />
+          <input type="text" id="seconds" disabled />
+        </div>
         <div class="card-header bg-dark text-light  text-center">
-          {{ questions[count].category }} / {{ count }}
+          {{ questions[count].category }}
         </div>
         <div class="card-body bg-dark text-light">
           <h5 class="card-title text-center">
-            {{ questions[count].question }}
+            {{ count }} / {{ questions[count].question }}
           </h5>
           <ul class="list-group  answers">
             <li
               class="list-group-item bg-dark text-light border-light m-2 border-2"
               v-for="option in questions[count].incorrectAnswers"
               :key="option"
-              @click="checkAnswer(option)"
+              @click="checkAnswer(option), ++count"
             >
               {{ option }}
             </li>
           </ul>
-          <button
+          <!-- <button
             type="submit"
             class="btn btn-primary btn-sm mt-4"
             @click="++count"
           >
             Next
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
@@ -76,6 +84,40 @@ export default {
         });
         console.log(response.data);
       });
+    var mins = 5;
+    var secs = mins * 60;
+    function countdown() {
+      setTimeout("Decrement()", 1000);
+    }
+
+    function Decrement() {
+      if (document.getElementById) {
+        minutes = document.getElementById("minutes");
+        seconds = document.getElementById("seconds");
+      }
+      if (seconds < 59) {
+        seconds.value = secs;
+      } else {
+        minutes.value = getminutes();
+        seconds.value = getseconds();
+      }
+      if (secs !== 0) {
+        secs--;
+        setTimeout("Decrement()", 1000);
+      } else {
+        this.count = 20;
+      }
+    }
+
+    function getminutes() {
+      // minutes is seconds divided by 60, rounded down
+      mins = Math.floor(secs / 60);
+      return mins;
+    }
+    function getseconds() {
+      // take mins remaining (as seconds) away from total seconds remaining
+      return secs - Math.round(mins * 60);
+    }
   },
   methods: {
     checkAnswer(option) {
@@ -119,8 +161,20 @@ li {
   margin: 10px;
   padding: 8px;
 }
+
+li:checked {
+  color: black;
+}
 .bg {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(115, 180, 255, 0);
   color: red;
+}
+input {
+  font-size: 20px;
+  width: 30px;
+  text-align: center;
+  background: none;
+  border: none;
+  color: #fff;
 }
 </style>
