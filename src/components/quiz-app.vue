@@ -40,16 +40,18 @@
       </div>
     </div>
     <div
-      class="card col-md-5 d-flex justify-content-center  algin-item-center m-auto mt-4 bg-dark text-light"
+      class="card col-md-5 d-flex justify-content-center  algin-item-center m-auto mt-4 box"
       v-else
     >
       <div class="card-body">
-        <h1 class="card-title text-center border-bottom pb-2">Quiz Result</h1>
+        <h1 class="card-title text-center border-bottom border-dark pb-2">
+          Quiz Result
+        </h1>
         <div class="answers">
           <p>correct answers: {{ correctAns }}</p>
           <p>wrong answers: {{ wrongAnswers }}</p>
         </div>
-        <div class="answers-btn border-top">
+        <div class="answers-btn border-top border-dark">
           <a href="#" @click="resetQuiz()" class="btn btn-sm btn-primary mt-4">
             Go To Home
           </a>
@@ -72,8 +74,6 @@ export default {
       correctAnswers: [],
       correctAns: 0,
       wrongAnswers: 0,
-      disabled: true,
-      time: "",
     };
   },
   mounted() {
