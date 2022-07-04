@@ -17,7 +17,7 @@
               :value="countDown"
             >
             </progress>
-            <p class="progress-text">{{ countDown }}</p>
+            <!-- <p class="progress-text">{{ countDown }}</p> -->
           </div>
           <ul class="list-group  answers">
             <li
@@ -29,9 +29,6 @@
               {{ option }}
             </li>
           </ul>
-          <button class="btn btn-sm btn-primary" @click="countDownTimer()">
-            click
-          </button>
           <!-- <button
             type="submit"
             class="btn btn-primary btn-sm mt-4"
@@ -92,6 +89,8 @@ export default {
         });
         console.log(response.data);
       });
+
+    this.countDownTimer();
   },
   methods: {
     checkAnswer(option) {
@@ -112,10 +111,7 @@ export default {
         this.wrongAnswers++;
       }
     },
-    startQuiz() {
-      this.startQuiz = true;
-      this.countDownTimer();
-    },
+
     countDownTimer() {
       if (this.countDown > 0) {
         this.timer = setTimeout(() => {
@@ -132,6 +128,7 @@ export default {
 </script>
 
 <style>
+@import url("../assets/bootstrap.css");
 body {
   background-color: rgba(238, 234, 234, 0.336);
 }
