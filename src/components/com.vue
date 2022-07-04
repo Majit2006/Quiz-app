@@ -1,6 +1,14 @@
 <template>
-  <div class="container">
-    <h1>{{ timestamp }}</h1>
+  <div>
+    <button @click="startQuizFunc()">click</button>
+    <div class="time-progress">
+      <progress class="mt-2 mb-2" max="300" height="4px" :value="countDown">
+      </progress>
+      <p class="progress-text">{{ countDown }}</p>
+      <p>
+        {{ count }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -8,24 +16,28 @@
 export default {
   data() {
     return {
-      timestamp: "",
+      count: 0,
+      countDown: 300,
+      timer: null,
+      startQuiz: false,
     };
   },
-  created() {
-    setInterval(this.getNow, 1000);
-  },
   methods: {
-    getNow: function() {
-      const today = new Date('5:0');
-      today.getDate();
-      const time = today.getMinutes() + ":" + today.getSeconds();
-      this.timestamp = time;
+    startQuizFunc() {
+      this.startQuiz = true;
+      this.countDownTimer();
+    },
+    countDownTimer() {
+      if (this.countDown > 0) {
+        this.timer = setTimeout(() => {
+          this.countDown -= 1;
+          this.countDownTimer();
+        }, 1000);
+      } else {
+        // this.handleAnswerClick(false);
+        this.count = 20;
+      }
     },
   },
 };
 </script>
-// const date = // today.getFullYear() + // "-" + // (today.getMonth() + 1) + //
-"-" + // const dateTime = date + " " + time;
-
-
-

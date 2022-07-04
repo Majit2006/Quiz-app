@@ -1,22 +1,27 @@
 <template>
   <div>
-    <div class="d-flex justify-content-center flex-wrap m-3" v-if="count < 20">
-      <div class="card col-md-6">
-        <div class="time">
-          {{ time }}
-          <!-- <input type="text"  id="minutes" disabled /> -->
-          <!-- <input type="text" id="seconds" disabled /> -->
-        </div>
-        <div class="card-header bg-dark text-light  text-center">
+    <div class="d-flex justify-content-center flex-wrap m-3 " v-if="count < 20">
+      <div class="card col-md-6 box">
+        <div class="card-header bg-light text-dark text-center">
           {{ questions[count].category }}
         </div>
-        <div class="card-body bg-dark text-light">
+        <div class="card-body bg-light text-dark">
           <h5 class="card-title text-center">
             {{ count }} / {{ questions[count].question }}
           </h5>
+          <div class="time-progress">
+            <progress
+              class="mt-2 mb-2"
+              max="300"
+              height="4px"
+              :value="countDown"
+            >
+            </progress>
+            <p class="progress-text">{{ countDown }}</p>
+          </div>
           <ul class="list-group  answers">
             <li
-              class="list-group-item bg-dark text-light border-light m-2 border-2"
+              class="list-group-item bg-primary text-light  m-2 "
               v-for="option in questions[count].incorrectAnswers"
               :key="option"
               @click="checkAnswer(option), ++count"
@@ -24,6 +29,9 @@
               {{ option }}
             </li>
           </ul>
+          <button class="btn btn-sm btn-primary" @click="countDownTimer()">
+            click
+          </button>
           <!-- <button
             type="submit"
             class="btn btn-primary btn-sm mt-4"
@@ -59,6 +67,8 @@ export default {
   data() {
     return {
       count: 0,
+      countDown: 300,
+      timer: null,
       questionsLength: 20,
       questions: [],
       selectedAnswers: [],
@@ -102,25 +112,51 @@ export default {
         this.wrongAnswers++;
       }
     },
-    resetQuiz() {
-      this.count = 0;
-      this.correctAnswers = [];
-      this.selectedAnswers = [];
+    startQuiz() {
+      this.startQuiz = true;
+      this.countDownTimer();
+    },
+    countDownTimer() {
+      if (this.countDown > 0) {
+        this.timer = setTimeout(() => {
+          this.countDown -= 1;
+          this.countDownTimer();
+        }, 1000);
+      } else {
+        // this.checkAnswer(false);
+        this.count = 20;
+      }
     },
   },
 };
 </script>
 
 <style>
+body {
+  background-color: rgba(238, 234, 234, 0.336);
+}
+.box {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
 [type="radio"] {
   box-shadow: none !important;
+}
+.time-progress {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
 }
 
 .answers-btn {
   font-size: 20px;
 }
+.bg-light {
+  background-color: rgb(255, 255, 255) !important;
+}
 li {
-  border: 3px solid #fff;
+  border: none !important;
   list-style: none;
   margin: 10px;
   padding: 8px;
@@ -140,5 +176,13 @@ input {
   background: none;
   border: none;
   color: #fff;
+}
+progress {
+  width: 300px;
+  height: 30px;
+}
+.progress-text {
+  margin-top: 10px;
+  margin-left: 20px;
 }
 </style>
