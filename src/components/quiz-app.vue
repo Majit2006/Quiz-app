@@ -1,14 +1,11 @@
 <template>
   <div>
-    <div class="card quiz-start text-center" v-if="count < 0">
-      <h1>Hellow World</h1>
-    </div>
-
     <div class="d-flex justify-content-center flex-wrap m-3" v-if="count < 20">
       <div class="card col-md-6">
         <div class="time">
-          <input type="text" id="minutes" disabled />
-          <input type="text" id="seconds" disabled />
+          {{ time }}
+          <!-- <input type="text"  id="minutes" disabled /> -->
+          <!-- <input type="text" id="seconds" disabled /> -->
         </div>
         <div class="card-header bg-dark text-light  text-center">
           {{ questions[count].category }}
@@ -69,6 +66,7 @@ export default {
       correctAns: 0,
       wrongAnswers: 0,
       disabled: true,
+      time: "",
     };
   },
   mounted() {
@@ -84,40 +82,6 @@ export default {
         });
         console.log(response.data);
       });
-    var mins = 5;
-    var secs = mins * 60;
-    function countdown() {
-      setTimeout("Decrement()", 1000);
-    }
-
-    function Decrement() {
-      if (document.getElementById) {
-        minutes = document.getElementById("minutes");
-        seconds = document.getElementById("seconds");
-      }
-      if (seconds < 59) {
-        seconds.value = secs;
-      } else {
-        minutes.value = getminutes();
-        seconds.value = getseconds();
-      }
-      if (secs !== 0) {
-        secs--;
-        setTimeout("Decrement()", 1000);
-      } else {
-        this.count = 20;
-      }
-    }
-
-    function getminutes() {
-      // minutes is seconds divided by 60, rounded down
-      mins = Math.floor(secs / 60);
-      return mins;
-    }
-    function getseconds() {
-      // take mins remaining (as seconds) away from total seconds remaining
-      return secs - Math.round(mins * 60);
-    }
   },
   methods: {
     checkAnswer(option) {
