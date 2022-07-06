@@ -130,7 +130,7 @@ export default {
 <style>
 @import url("../assets/bootstrap.css");
 body {
-  background-color: rgba(238, 234, 234, 0.336);
+  background-color: rgb(0 114 255 / 12%);
 }
 .box {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
@@ -157,10 +157,12 @@ li {
   list-style: none;
   margin: 10px;
   padding: 8px;
+  transition: 0.3s, all 0.3s;
 }
 
-li:checked {
-  color: black;
+li:hover {
+  background: rgb(161, 0, 235) !important;
+  color: rgb(255, 255, 255) !important;
 }
 .bg {
   background-color: rgba(115, 180, 255, 0);
