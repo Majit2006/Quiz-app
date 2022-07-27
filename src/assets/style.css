@@ -1,0 +1,89 @@
+body {
+  background-color: rgb(0 114 255 / 12%);
+}
+.box {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input {
+  text-transform: capitalize;
+}
+
+[type="radio"] {
+  box-shadow: none !important;
+}
+.time-progress {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+}
+.answers-btn {
+  font-size: 20px;
+}
+.bg-light {
+  background-color: rgb(255, 255, 255) !important;
+}
+li {
+  border: none !important;
+  list-style: none;
+  margin: 10px;
+  padding: 8px;
+  transition: 0.3s, all 0.3s;
+}
+li:hover {
+  background: rgb(161, 0, 235) !important;
+  color: rgb(255, 255, 255) !important;
+}
+.bg {
+  background-color: rgba(115, 180, 255, 0);
+  color: red;
+}
+input {
+  font-size: 20px;
+  width: 30px;
+  background: none;
+  border: none;
+  color: #fff;
+}
+progress {
+  width: 300px;
+  height: 30px;
+}
+.progress-text {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.answers p {
+  text-transform: capitalize;
+}
+.mintes {
+  margin-left: 30px;
+}
+
+.mintes p {
+  text-transform: capitalize;
+}
+
+[type="button"] {
+  width:420px !important;
+  padding: 5px;
+}
+
+.text-danger{
+  color: red !important;
+}

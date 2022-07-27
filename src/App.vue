@@ -1,14 +1,14 @@
 <template>
   <div class="container">
-    <quiz-app />
+        <quiz/>
   </div>
 </template>
 
 <script>
-import QuizApp from "./components/quiz-app.vue";
-export default {
-  components: {
-    QuizApp,
-  },
-};
-</script>
+import Quiz from './components/quiz.vue';
+export default { 
+  components:{
+    Quiz
+}
+}
+</script>  
