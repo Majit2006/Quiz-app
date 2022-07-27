@@ -79,11 +79,24 @@ progress {
   text-transform: capitalize;
 }
 
-[type="button"] {
-  width:420px !important;
+input[type="submit"] {
+  width: 420px !important;
   padding: 5px;
 }
 
-.text-danger{
+.text-danger {
   color: red !important;
+}
+
+.input-container[data-error] .input {
+  border: 1px solid #c92432;
+  color: #c92432;
+  background-color: #fffafa;
+}
+
+.input-container[data-error]::after {
+  content: attr(data-error);
+  color: #ffffffe3;
+  font-size: 0.85em;
+   margin: 10px 0;
 }
