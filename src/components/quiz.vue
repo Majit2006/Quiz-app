@@ -4,11 +4,23 @@
      <div class="container rounded mt-4 col-sm-6 bg-primary d-flex flex-column">
     <h1 class="text-light text-center">Quiz Start</h1>
     <div class="d-flex flex-column m-auto  form-group col-sm-8 justify-content-center align-content-center">
-    <form class="was-validated">
-    <input type="text" v-model.trim="name"  class="border-0 mt-3 form-control" placeholder="User name" required>
-    <input type="text" v-model.trim="lastname"  class="border-0 mt-4 form-control text-capitalize" placeholder="Last name" required>
-    <input type="number" v-model.number="countDown" class="border-0 mt-4 form-control text-capitalize" placeholder="Minutes" required>
-    <input type="submit" @click="count++, test()" class="text-light h4 mt-3 bg-dark rounded text-decoration-none" value="Start">
+    <form novalidate="true" class="was-validated">
+     <div class="mt-3">
+     <input type="text" v-model.trim="name"   class="border-0 mt-3 form-control col-12" placeholder="User name" required>
+      <div class="valid-feedback text-warning">Valid.</div>
+      <div class="invalid-feedback text-danger">Please fill out this field.</div>
+     </div>
+     <div class="mt-3">
+    <input type="text" v-model.trim="lastname"  class="border-0 mt-4 form-control text-capitalize col-12" placeholder="Last name" required>
+          <div class="valid-feedback text-warning">Valid.</div>
+      <div class="invalid-feedback text-danger">Please fill out this field.</div>
+    </div>
+    <div>
+      <input type="number" v-model.number="countDown" class="border-0 mt-4 form-control text-capitalize" placeholder="Minutes" required>
+      <div class="valid-feedback text-warning">Valid.</div>
+      <div class="invalid-feedback text-danger">Please fill out this field.</div>
+    </div>
+    <input type="button" @click="count++,test()"  class="text-light h2 mt-3 bg-dark rounded text-decoration-none btn btn-sm col-12" value="Start">
     </form>
     </div>
     </div>
@@ -30,7 +42,7 @@
               :key="option"
               @click="checkAnswer(option), ++count"
             >
-              {{ option }}
+              {{ option }} 
             </li>
           </ul>
         </div>
@@ -97,6 +109,7 @@ export default {
         });
       });
     },
+
     methods: {
         checkAnswer(option) {
             this.selectedAnswers[this.count] = option;
